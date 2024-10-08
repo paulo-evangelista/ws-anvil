@@ -25,7 +25,7 @@ func startAnvil() error {
 		anvilCmd.Process.Kill()
 	}
 
-	anvilCmd = exec.Command("anvil", "--no-cors", "--block-time", "5")
+	anvilCmd = exec.Command("anvil", "--no-cors", "--block-time", "3", "--code-size-limit", "8888888888888888")
 
 	stdout, err := anvilCmd.StdoutPipe()
 	if err != nil {
@@ -33,7 +33,10 @@ func startAnvil() error {
 	}
 
 	stderr, err := anvilCmd.StderrPipe()
-
+	if err != nil {
+		return fmt.Errorf("erro ao obter stdout: %w", err)
+	}
+	
 	if err := anvilCmd.Start(); err != nil {
 		return fmt.Errorf("erro ao iniciar anvil: %w", err)
 	}
