@@ -20,6 +20,7 @@ func handleConnections(w http.ResponseWriter, r *http.Request) {
 	}
 	defer ws.Close()
 	connectedClients[ws] = true
+	ws.WriteMessage(websocket.TextMessage, []byte(fmt.Sprintf("[WS] %d clients connected", len(connectedClients))))
 	for {
 		_, _, err := ws.ReadMessage()
 		if err != nil {

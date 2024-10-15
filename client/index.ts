@@ -1,6 +1,6 @@
 import WebSocket from 'ws';
 
-const socket = new WebSocket('ws://localhost:8080');
+const socket = new WebSocket('wss://blockchain.vert-tech.dev/server/');
 
 socket.on('open', () => {
     console.log('Connected to server');
@@ -8,7 +8,7 @@ socket.on('open', () => {
 );
 
 socket.on('message', (message) => {
-    console.log('Received message:', message);
+    console.log('>', message.toString());
     }
 );
 
